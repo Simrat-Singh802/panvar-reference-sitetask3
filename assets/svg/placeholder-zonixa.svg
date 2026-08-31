@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Product image coming soon">
+  <title>ZONIXA product image coming soon</title>
+  <rect width="300" height="400" fill="#f6eef5"/>
+
+  <!-- Hooded topwear silhouette -->
+  <g fill="none" stroke="#3b1f38" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" opacity="0.42">
+    <path d="M112 118 L82 136 L64 196 L92 210 L100 190 L100 300 L200 300 L200 190 L208 210 L236 196 L218 136 L188 118"/>
+    <path d="M112 118 q38 34 76 0"/>
+    <path d="M118 112 q32 -30 64 0 q-32 22 -64 0 Z"/>
+    <path d="M138 128 v52 M162 128 v52"/>
+  </g>
+
+  <text x="150" y="344" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="13" font-weight="700" letter-spacing="4.5" fill="#3b1f38">ZONIXA</text>
+  <text x="150" y="364" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="10" letter-spacing="1.4" fill="#8a6d86">IMAGE COMING SOON</text>
+</svg>

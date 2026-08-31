@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Product image coming soon">
+  <title>MSP Sports product image coming soon</title>
+  <rect width="300" height="300" fill="#e7f1fb"/>
+
+  <!-- Track-pant / bottomwear silhouette -->
+  <g fill="none" stroke="#0b5cad" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" opacity="0.45">
+    <path d="M112 62 h76 l8 76 l6 92 h-38 l-14 -104 l-14 104 h-38 l6 -92 Z"/>
+    <path d="M112 62 h76 v14 h-76 Z"/>
+    <path d="M150 76 v58"/>
+    <!-- Side stripe, the sportswear signature -->
+    <path d="M122 86 l-5 60" stroke-dasharray="7 5"/>
+    <path d="M178 86 l5 60" stroke-dasharray="7 5"/>
+  </g>
+
+  <text x="150" y="256" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="13" font-weight="700" letter-spacing="1.6" fill="#0b5cad">MSP SPORTS</text>
+  <text x="150" y="274" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="10" letter-spacing="1.4" fill="#5a86ad">IMAGE COMING SOON</text>
+</svg>

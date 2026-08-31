@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Partials Reference — Panwar Knitwear</title>
+<meta name="robots" content="noindex">
+<style>
+  body { font-family: Consolas, monospace; max-width: 60rem; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.6; }
+  pre { background: #f4f5f7; padding: 1rem; overflow-x: auto; border-radius: 6px; font-size: 12px; }
+  h2 { border-bottom: 2px solid #333; padding-bottom: .4rem; margin-top: 2.5rem; }
+  .warn { background: #fff4e0; border-left: 4px solid #d9a441; padding: 1rem; }
+</style>
+</head>
+<body>
+
+<h1>Partials Reference</h1>
+
+<p class="warn">
+  <strong>This file is the canonical source for the shared header, footer and
+  icon sprite.</strong> There is no build step (Node.js is not installed and
+  <code>fetch()</code> of partials fails under <code>file://</code>), so this
+  markup is duplicated into every page. When the chrome changes, edit it
+  <em>here first</em>, then propagate to all pages.
+</p>
+
+<p>
+  Find every copy by grepping for the guard comment:<br>
+  <code>SITE HEADER — canonical source</code> &nbsp;/&nbsp;
+  <code>SITE FOOTER — canonical source</code>
+</p>
+
+<h2>What you should NOT need to edit per page</h2>
+<ul>
+  <li><strong>Active nav link</strong> — <code>nav.js</code> sets
+      <code>aria-current="page"</code> from <code>location.pathname</code>.</li>
+  <li><strong>Phone / WhatsApp / email / address</strong> — edit
+      <code>assets/js/site.config.js</code> only; <code>ui.js</code> stamps
+      every <code>[data-contact]</code> slot.</li>
+  <li><strong>Copyright year</strong> — <code>[data-year]</code> is stamped by JS.</li>
+  <li><strong>External link URLs</strong> — <code>[data-link="instagram"]</code>
+      etc. resolve from <code>site.config.js</code>.</li>
+</ul>
+
+<h2>Per-page values that DO change</h2>
+<ul>
+  <li><code>&lt;title&gt;</code>, <code>meta[name=description]</code>, OG tags, canonical.</li>
+  <li><code>&lt;body data-brand="..."&gt;</code> — <code>zonixa</code> on zonixa.html,
+      <code>msp</code> on msp-sports.html, absent elsewhere.</li>
+  <li><code>forms.js</code> is included on <strong>contact.html only</strong>.</li>
+</ul>
+
+<h2>1 · &lt;head&gt; — stylesheet order is fixed</h2>
+<pre>
+&lt;link rel="stylesheet" href="assets/css/00-reset.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/01-tokens.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/02-base.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/03-layout.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/04-components.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/05-sections.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/06-brand-zonixa.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/07-brand-msp.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/08-utilities.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/09-animations.css"&gt;
+</pre>
+<p>
+  No <code>@import</code> — it serialises requests and degrades under
+  <code>file://</code>. Both brand sheets load on every page: they are scoped
+  by <code>[data-brand]</code>, which is what lets both brands render side by
+  side on the homepage.
+</p>
+
+<h2>2 · The &lt;html&gt; js-class flip</h2>
+<pre>
+&lt;html lang="en" class="no-js"&gt;
+...
+&lt;script&gt;document.documentElement.className =
+  document.documentElement.className.replace('no-js','js');&lt;/script&gt;
+</pre>
+<p>
+  Inline and placed in <code>&lt;head&gt;</code> so it runs before first paint.
+  Reveal animations are scoped to <code>.js</code>, so if JavaScript is
+  unavailable the content is simply visible rather than stuck at
+  <code>opacity: 0</code>.
+</p>
+
+<h2>3 · Icon sprite (inline, immediately after &lt;body&gt;)</h2>
+<p>
+  Master copy: <code>assets/svg/icons.svg</code>. It is inlined rather than
+  referenced because <code>&lt;use href="icons.svg#id"&gt;</code> is blocked
+  under <code>file://</code>.
+</p>
+
+<h2>4 · Header</h2>
+<pre>
+&lt;!-- ===== SITE HEADER — canonical source: docs/partials-reference.html ===== --&gt;
+&lt;div data-header-sentinel aria-hidden="true"&gt;&lt;/div&gt;
+&lt;header class="header" data-header&gt;
+  &lt;div class="container header__inner"&gt;
+    &lt;a class="header__brand" href="index.html"&gt;...&lt;/a&gt;
+    &lt;button class="nav-toggle" data-nav-toggle aria-expanded="false"
+            aria-controls="primary-nav" aria-label="Menu"&gt;...&lt;/button&gt;
+    &lt;nav class="nav" id="primary-nav" data-nav-drawer aria-label="Primary"&gt;...&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;div class="nav-scrim" data-nav-scrim&gt;&lt;/div&gt;
+</pre>
+<p>
+  The sentinel sits immediately <em>before</em> the sticky header; an
+  IntersectionObserver watches it to toggle <code>data-stuck</code>, which
+  avoids a scroll listener entirely.
+</p>
+
+<h2>4b · Footer notes</h2>
+<p>
+  Column titles are <code>&lt;p class="footer__col-title"&gt;</code>, deliberately
+  <strong>not</strong> <code>&lt;h2&gt;</code>. They are labels, not document
+  structure — as headings they appeared as peers of real page sections and
+  cluttered screen-reader heading navigation on every page.
+</p>
+<p>
+  The Explore column's list is wrapped in
+  <code>&lt;nav aria-label="Footer"&gt;</code> so it is exposed as a navigation
+  landmark, distinct from the primary nav in the header.
+</p>
+<p>
+  Every external link carries its <strong>real URL in the markup</strong>
+  (plus <code>target="_blank" rel="noopener"</code>) so it still works with
+  JavaScript disabled. <code>ui.js</code> re-stamps it from
+  <code>site.config.js</code>, which remains the single place to edit a URL —
+  but the markup is never left as a dead <code>href="#"</code>.
+</p>
+
+<h2>5 · Scripts (before &lt;/body&gt;)</h2>
+<pre>
+&lt;script defer src="assets/js/site.config.js"&gt;&lt;/script&gt;
+&lt;script defer src="assets/js/nav.js"&gt;&lt;/script&gt;
+&lt;script defer src="assets/js/ui.js"&gt;&lt;/script&gt;
+&lt;script defer src="assets/js/reveal.js"&gt;&lt;/script&gt;
+&lt;script defer src="assets/js/forms.js"&gt;&lt;/script&gt;  &lt;!-- contact.html only --&gt;
+&lt;script defer src="assets/js/main.js"&gt;&lt;/script&gt;   &lt;!-- always last --&gt;
+</pre>
+<p>
+  Classic scripts, not modules — <code>&lt;script type="module"&gt;</code> is
+  blocked under <code>file://</code>. <code>defer</code> preserves order and
+  keeps all of it off the critical rendering path.
+</p>
+
+<h2>6 · Link rules</h2>
+<p>
+  Always relative with an explicit <code>.html</code>
+  (<code>href="zonixa.html"</code>). Never root-relative
+  (<code>href="/zonixa"</code>) — under <code>file://</code> that resolves to
+  the drive root and breaks every link.
+</p>
+
+</body>
+</html>

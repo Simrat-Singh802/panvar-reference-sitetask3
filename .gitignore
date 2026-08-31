@@ -1,0 +1,16 @@
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Local Claude Code settings (may contain machine-specific paths)
+.claude/settings.local.json
+
+# Scratch / working files
+*.log
+*.tmp
+~$*

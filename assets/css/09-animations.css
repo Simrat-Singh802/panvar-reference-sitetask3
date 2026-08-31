@@ -1,0 +1,97 @@
+/* ==========================================================================
+   09 · ANIMATIONS
+   Only transform and opacity are animated — both are compositor-friendly and
+   never trigger layout.
+
+   Motion is gated twice:
+     1. the prefers-reduced-motion block at the bottom of this file
+     2. a JS bail in reveal.js that reveals everything immediately
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Scroll reveal
+   Elements start hidden ONLY when JS is present. Without JS the .no-js class
+   is never removed... so we invert: html.js opts in. This guarantees content
+   is visible if JS fails to load, rather than permanently invisible.
+   -------------------------------------------------------------------------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-emphasis);
+}
+
+.js [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children within a revealed group. */
+.js [data-reveal-group] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-emphasis);
+}
+
+.js [data-reveal-group][data-revealed] > * {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal-group][data-revealed] > *:nth-child(1) { transition-delay: 0ms; }
+.js [data-reveal-group][data-revealed] > *:nth-child(2) { transition-delay: 70ms; }
+.js [data-reveal-group][data-revealed] > *:nth-child(3) { transition-delay: 140ms; }
+.js [data-reveal-group][data-revealed] > *:nth-child(4) { transition-delay: 210ms; }
+.js [data-reveal-group][data-revealed] > *:nth-child(5) { transition-delay: 280ms; }
+.js [data-reveal-group][data-revealed] > *:nth-child(6) { transition-delay: 350ms; }
+
+/* --------------------------------------------------------------------------
+   Hero entrance — runs once on load, no observer needed.
+   -------------------------------------------------------------------------- */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js .hero__title,
+.js .hero__lede,
+.js .hero__actions,
+.js .hero__meta {
+  animation: rise-in var(--dur-slow) var(--ease-emphasis) both;
+}
+
+.js .hero__lede    { animation-delay: 90ms; }
+.js .hero__actions { animation-delay: 180ms; }
+.js .hero__meta    { animation-delay: 270ms; }
+
+/* --------------------------------------------------------------------------
+   Motion gate #2 (JS-side gate is in reveal.js)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal-group] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .js .hero__title,
+  .js .hero__lede,
+  .js .hero__actions,
+  .js .hero__meta {
+    animation: none;
+  }
+
+  .card:hover,
+  .card:hover .card__media img,
+  .link-row:hover {
+    transform: none !important;
+  }
+}

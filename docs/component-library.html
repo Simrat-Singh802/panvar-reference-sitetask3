@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Library — Panwar Knitwear</title>
+<meta name="robots" content="noindex">
+
+<link rel="stylesheet" href="../assets/css/00-reset.css">
+<link rel="stylesheet" href="../assets/css/01-tokens.css">
+<link rel="stylesheet" href="../assets/css/02-base.css">
+<link rel="stylesheet" href="../assets/css/03-layout.css">
+<link rel="stylesheet" href="../assets/css/04-components.css">
+<link rel="stylesheet" href="../assets/css/05-sections.css">
+<link rel="stylesheet" href="../assets/css/06-brand-zonixa.css">
+<link rel="stylesheet" href="../assets/css/07-brand-msp.css">
+<link rel="stylesheet" href="../assets/css/08-utilities.css">
+<link rel="stylesheet" href="../assets/css/09-animations.css">
+<script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
+
+<style>
+  .lib-head { background: var(--clr-ink-900); color: #fff; padding: var(--sp-8) 0; }
+  .lib-head h1 { color: #fff; }
+  .lib-sec { padding-block: var(--sp-8); border-block-end: 1px solid var(--clr-line); }
+  .lib-sec > .container > h2 {
+    font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: var(--tracking-caps);
+    color: var(--clr-text-muted); margin-block-end: var(--sp-5);
+  }
+  .lib-brands { display: grid; gap: var(--sp-6); }
+  @media (min-width: 52rem) { .lib-brands { grid-template-columns: 1fr 1fr; } }
+  .lib-pane { padding: var(--sp-6); border: 1px solid var(--clr-line); border-radius: 8px; }
+  .lib-pane__label {
+    font-size: var(--fs-xs); font-weight: 700; letter-spacing: var(--tracking-caps);
+    text-transform: uppercase; color: var(--clr-accent); margin-block-end: var(--sp-5);
+  }
+  .lib-swatch { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+  .lib-swatch div {
+    width: 4.5rem; height: 4.5rem; border-radius: 6px; border: 1px solid var(--clr-line);
+    display: grid; place-items: end center; font-size: 9px; padding-bottom: 4px; color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  }
+</style>
+</head>
+<body>
+
+<!-- Sprite is inlined here too, so this page works standalone. -->
+<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m12 10.6 6.4-6.4 1.4 1.4-6.4 6.4 6.4 6.4-1.4 1.4-6.4-6.4-6.4 6.4-1.4-1.4 6.4-6.4-6.4-6.4 1.4-1.4z"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="m13.2 5 7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.4l-4.6-4.6z"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M12 15.4 5.6 9l1.4-1.4 5 5 5-5L18.4 9z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .6 3.6 1 1 0 0 1-.2 1z"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 0 1 12 3.8m-3.6 4c-.2 0-.5.1-.7.4s-.9.9-.9 2.1.9 2.4 1 2.6 1.8 2.9 4.4 4c2.2.9 2.6.7 3.1.7s1.6-.7 1.8-1.3.2-1.2.2-1.3-.2-.2-.4-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a7 7 0 0 1-2-1.3 7.6 7.6 0 0 1-1.4-1.8c-.2-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.8-1.8c-.2-.4-.4-.4-.5-.4z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1m9 7.7 6.8-5.5H5.2zM4 8.4V17h16V8.4l-8 6.4z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7m0 4.5A2.5 2.5 0 1 0 12 11.5 2.5 2.5 0 0 0 12 6.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M9.6 16.2 5.4 12l-1.4 1.4 5.6 5.6L20.4 8.2 19 6.8z"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h5v2H6v11h11v-4h2v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1"/></symbol>
+  <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20V9l6 3.5V9l6 3.5V4h4l1 16zm4-2h2v-3H6zm5 0h2v-3h-2zm5 0h2v-3h-2z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5.5-10 5.5L2 7.5zm0 2.3L5.9 7.5 12 10.7l6.1-3.2zM2 12.2l10 5.5 10-5.5v2.3l-10 5.5-10-5.5z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6.5c0 4.5 3.4 8.7 8 10.5 4.6-1.8 8-6 8-10.5V5zm-1 13-3.5-3.5 1.4-1.4L11 12.2l4.1-4.1 1.4 1.4z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 5h11a1 1 0 0 1 1 1v2h3.3a1 1 0 0 1 .8.4l2.7 3.6a1 1 0 0 1 .2.6V17a1 1 0 0 1-1 1h-1.2a3 3 0 0 1-5.6 0H9.8a3 3 0 0 1-5.6 0H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1m12 5v3.2a3 3 0 0 1 3.8.8H20v-1.7L17.8 10zM7 16.5a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0m9 0a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><path d="M9.6 7.6 19 17l1.4-1.4-7-7zM6 3a3 3 0 1 1-1.6 5.5L7.2 12l-2.8 3.5A3 3 0 1 1 6 21a3 3 0 0 1-1.2-5.7L2 12l2.8-3.3A3 3 0 0 1 6 3m0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2m0 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 0 4.1.1a5 5 0 0 1 5 5c0 1 .1 1.4.1 4.1s0 3-.1 4.1a5 5 0 0 1-5 5c-1 0-1.4.1-4.1.1s-3 0-4.1-.1a5 5 0 0 1-5-5C2.9 14.4 2.8 14 2.8 12s0-3 .1-4.1a5 5 0 0 1 5-5C9 2 9.3 2 12 2m0 1.8c-2.7 0-3 0-4 .1a3.2 3.2 0 0 0-3.2 3.2c0 1-.1 1.3-.1 4s0 3 .1 4a3.2 3.2 0 0 0 3.2 3.2c1 .1 1.3.1 4 .1s3 0 4-.1a3.2 3.2 0 0 0 3.2-3.2c.1-1 .1-1.3.1-4s0-3-.1-4a3.2 3.2 0 0 0-3.2-3.2c-1-.1-1.3-.1-4-.1m0 3.1a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2m0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6m5.3-3.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4"/></symbol>
+</svg>
+
+<header class="lib-head">
+  <div class="container">
+    <h1>Component Library</h1>
+    <p class="u-mt-4" style="color:var(--clr-ink-300)">
+      Every component rendered under both brands. If a component looks identical
+      in both columns, its theming is incomplete.
+      &nbsp;<a href="../index.html" style="color:#fff">&larr; Back to site</a>
+    </p>
+  </div>
+</header>
+
+<!-- TOKENS -->
+<section class="lib-sec">
+  <div class="container">
+    <h2>Brand palettes</h2>
+    <div class="lib-brands">
+      <div class="lib-pane" data-brand="zonixa">
+        <p class="lib-pane__label">ZONIXA — editorial / sharp</p>
+        <div class="lib-swatch">
+          <div style="background:var(--clr-accent)">accent</div>
+          <div style="background:var(--clr-accent-hover)">hover</div>
+          <div style="background:var(--clr-accent-soft);color:var(--clr-accent);text-shadow:none">soft</div>
+          <div style="background:var(--clr-ink-900)">ink 900</div>
+          <div style="background:var(--clr-ink-500)">ink 500</div>
+        </div>
+      </div>
+      <div class="lib-pane" data-brand="msp">
+        <p class="lib-pane__label">MSP SPORTS — athletic / rounded</p>
+        <div class="lib-swatch">
+          <div style="background:var(--clr-accent)">accent</div>
+          <div style="background:var(--clr-accent-hover)">hover</div>
+          <div style="background:var(--clr-accent-soft);color:var(--clr-accent);text-shadow:none">soft</div>
+          <div style="background:var(--clr-ink-900)">ink 900</div>
+          <div style="background:var(--clr-ink-500)">ink 500</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="lib-sec">
+  <div class="container">
+    <h2>Buttons — note the corner radius and tracking differ per brand</h2>
+    <div class="lib-brands">
+      <div class="lib-pane" data-brand="zonixa">
+        <p class="lib-pane__label">ZONIXA</p>
+        <div class="cluster">
+          <a class="btn btn--primary" href="#">Primary</a>
+          <a class="btn btn--secondary" href="#">Secondary</a>
+          <a class="btn btn--ghost" href="#">Ghost</a>
+          <a class="btn btn--whatsapp" href="#">
+            <svg class="btn__icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="lib-pane" data-brand="msp">
+        <p class="lib-pane__label">MSP SPORTS</p>
+        <div class="cluster">
+          <a class="btn btn--primary" href="#">Primary</a>
+          <a class="btn btn--secondary" href="#">Secondary</a>
+          <a class="btn btn--ghost" href="#">Ghost</a>
+          <a class="btn btn--whatsapp" href="#">
+            <svg class="btn__icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="lib-sec">
+  <div class="container">
+    <h2>Product card — 3:4 portrait for ZONIXA, 1:1 square for MSP</h2>
+    <div class="lib-brands">
+      <div class="lib-pane" data-brand="zonixa">
+        <p class="lib-pane__label">ZONIXA</p>
+        <article class="card" style="max-width:16rem">
+          <div class="card__media">
+            <img src="../assets/svg/placeholder-zonixa.svg" class="is-placeholder"
+                 alt="" width="300" height="400">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">320 GSM Heavy Zip Hoodies</h3>
+            <p class="card__meta">320 GSM · Full zip</p>
+          </div>
+        </article>
+      </div>
+      <div class="lib-pane" data-brand="msp">
+        <p class="lib-pane__label">MSP SPORTS</p>
+        <article class="card" style="max-width:16rem">
+          <div class="card__media">
+            <img src="../assets/svg/placeholder-msp.svg" class="is-placeholder"
+                 alt="" width="300" height="300">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Track Pants</h3>
+            <p class="card__meta">Full length · Sportswear</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE + BADGES -->
+<section class="lib-sec">
+  <div class="container">
+    <h2>Feature card, badges, fabric pills</h2>
+    <div class="lib-brands">
+      <div class="lib-pane" data-brand="zonixa">
+        <p class="lib-pane__label">ZONIXA</p>
+        <article class="feature">
+          <span class="feature__icon"><svg aria-hidden="true"><use href="#i-layers"></use></svg></span>
+          <h3 class="feature__title">Premium fabric range</h3>
+          <p class="feature__text">Matched to the product.</p>
+        </article>
+        <div class="cluster u-mt-6">
+          <span class="badge">Badge</span>
+          <span class="badge badge--neutral">Neutral</span>
+          <span class="badge badge--todo">To be confirmed</span>
+        </div>
+        <ul class="fabric-list u-mt-6" role="list">
+          <li class="fabric-list__item">Spun Fleece</li>
+          <li class="fabric-list__item">Dry Fit</li>
+        </ul>
+      </div>
+      <div class="lib-pane" data-brand="msp">
+        <p class="lib-pane__label">MSP SPORTS</p>
+        <article class="feature">
+          <span class="feature__icon"><svg aria-hidden="true"><use href="#i-layers"></use></svg></span>
+          <h3 class="feature__title">Moisture-wicking options</h3>
+          <p class="feature__text">For training and performance use.</p>
+        </article>
+        <div class="cluster u-mt-6">
+          <span class="badge">Badge</span>
+          <span class="badge badge--neutral">Neutral</span>
+          <span class="badge badge--todo">To be confirmed</span>
+        </div>
+        <ul class="fabric-list u-mt-6" role="list">
+          <li class="fabric-list__item">Honeycomb Lycra</li>
+          <li class="fabric-list__item">Cotton Lycra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="lib-sec">
+  <div class="container container--narrow">
+    <h2>Form controls — including the error state</h2>
+    <div class="stack stack--md">
+      <div class="field">
+        <label class="field__label" for="lib-a">Normal field</label>
+        <input class="field__control" type="text" id="lib-a" placeholder="Placeholder">
+      </div>
+      <div class="field">
+        <label class="field__label" for="lib-b">Invalid field <span class="field__required">*</span></label>
+        <input class="field__control" type="text" id="lib-b" aria-invalid="true" aria-describedby="lib-b-e">
+        <p class="field__error" id="lib-b-e">Company name is required.</p>
+      </div>
+      <div class="field">
+        <label class="field__label" for="lib-c">Select</label>
+        <select class="field__control" id="lib-c">
+          <option>Select a range</option>
+        </select>
+      </div>
+      <div class="form-error-summary">
+        <p class="form-error-summary__title">There are 2 problems with this form:</p>
+        <ul><li>Your name is required.</li><li>Enter a valid phone number.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISC -->
+<section class="lib-sec">
+  <div class="container container--narrow">
+    <h2>Link rows, contact tile, process step, callout</h2>
+    <div class="stack stack--sm">
+      <a class="link-row" href="#"><span>Instagram</span>
+        <svg class="link-row__icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+      <a class="link-row" href="#"><span>Google Maps</span>
+        <svg class="link-row__icon" aria-hidden="true"><use href="#i-pin"></use></svg></a>
+    </div>
+    <div class="contact-tile u-mt-6">
+      <span class="contact-tile__icon"><svg aria-hidden="true"><use href="#i-phone"></use></svg></span>
+      <div>
+        <p class="contact-tile__label">Call us</p>
+        <a class="contact-tile__value" href="#">+91 98760 45457</a>
+      </div>
+    </div>
+    <div class="step u-mt-8">
+      <span class="step__num">01</span>
+      <h3 class="step__title">Enquiry</h3>
+      <p class="step__text">Tell us the product, fabric and quantity you need.</p>
+    </div>
+    <div class="callout u-mt-8">
+      <p class="callout__title">Note for the site owner</p>
+      <p>This amber style marks anything still awaiting real content.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ICONS -->
+<section class="lib-sec">
+  <div class="container">
+    <h2>Icon sprite</h2>
+    <div class="cluster">
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-menu"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-close"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-arrow-right"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-chevron-down"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-whatsapp"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-check"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-external"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-factory"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-layers"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-truck"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-scissors"></use></svg></span>
+      <span><svg style="width:1.5rem;height:1.5rem" aria-hidden="true"><use href="#i-instagram"></use></svg></span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

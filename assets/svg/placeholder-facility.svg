@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Facility photograph coming soon">
+  <title>Facility photograph coming soon</title>
+  <rect width="400" height="300" fill="#eef0f3"/>
+
+  <!-- Knitting-machine / factory-floor abstraction -->
+  <g fill="none" stroke="#3a3f48" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" opacity="0.38">
+    <path d="M60 210 h280"/>
+    <path d="M92 210 v-70 h64 v70 M188 210 v-104 h64 v104 M284 210 v-56 h44 v56"/>
+    <path d="M92 140 l32 -26 l32 26 M188 106 l32 -26 l32 26"/>
+    <path d="M112 168 h24 M208 138 h24 M300 178 h16"/>
+    <!-- Yarn cones -->
+    <path d="M64 210 l10 -30 l10 30 Z"/>
+    <path d="M344 210 l10 -24 l10 24 Z"/>
+  </g>
+
+  <text x="200" y="256" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="12" font-weight="600" letter-spacing="2.6" fill="#3a3f48">PANWAR KNITWEAR</text>
+  <text x="200" y="274" text-anchor="middle"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="10" letter-spacing="1.4" fill="#868c97">PHOTOGRAPH COMING SOON</text>
+</svg>

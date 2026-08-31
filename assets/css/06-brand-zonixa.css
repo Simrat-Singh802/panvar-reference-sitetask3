@@ -1,0 +1,71 @@
+/* ==========================================================================
+   06 · BRAND · ZONIXA  (topwear — t-shirts, hoodies, sweatshirts, winter wear)
+
+   Personality: editorial, fashion-led, sharp. Near-black ink with a deep
+   plum accent, tight square corners, wide letter-spacing, restrained motion.
+
+   Scope with data-brand — works on <body> for a whole page OR on a <section>
+   so ZONIXA and MSP can sit side by side on the homepage.
+   ========================================================================== */
+
+[data-brand="zonixa"] {
+  /* Deep plum-black. 12.6:1 on white — comfortably AA for body text. */
+  --clr-accent:       #3b1f38;
+  --clr-accent-hover: #552c50;
+  --clr-accent-ink:   #ffffff;
+  --clr-accent-soft:  #f6eef5;
+  --clr-accent-line:  #d9c3d5;
+
+  /* Sharp, editorial geometry — the clearest signal against MSP. */
+  --radius-sm:   0px;
+  --radius-md:   2px;
+  --radius-lg:   3px;
+  --radius-pill: 2px;
+
+  /* Fashion-brand typography: airy capitals. */
+  --tracking-caps: 0.2em;
+  --tracking-wide: 0.14em;
+  --brand-eyebrow-tracking: 0.24em;
+
+  --shadow-lg: 0 22px 50px rgba(59, 31, 56, 0.16),
+               0 4px 12px rgba(59, 31, 56, 0.08);
+}
+
+/* Editorial cards: taller crop, hairline frame, no lift on hover — the
+   image scale alone carries the interaction. */
+[data-brand="zonixa"] .card {
+  border-radius: var(--radius-lg);
+}
+
+[data-brand="zonixa"] .card__media {
+  aspect-ratio: 3 / 4;
+}
+
+@media (hover: hover) {
+  [data-brand="zonixa"] .card:hover {
+    transform: none;
+    border-color: var(--clr-accent);
+  }
+
+  [data-brand="zonixa"] .card:hover .card__media img {
+    transform: scale(1.06);
+  }
+}
+
+/* Uppercase product titles, letterspaced — reads as a lookbook. */
+[data-brand="zonixa"] .card__title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+
+/* Buttons: squared, wide-tracked. */
+[data-brand="zonixa"] .btn {
+  letter-spacing: 0.16em;
+}
+
+/* A thin rule above brand section headings. */
+[data-brand="zonixa"] .brand-mark {
+  --brand-rule-color: var(--clr-accent);
+}

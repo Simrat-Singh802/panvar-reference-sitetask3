@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 40" role="img" aria-label="MSP Sports">
+  <title>MSP Sports</title>
+  <!-- Angled speed accent -->
+  <path d="M0 30 L9 10 h7 L7 30 Z" fill="#0b5cad"/>
+  <text x="16" y="27"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="25" font-weight="700" letter-spacing="-0.5"
+        fill="#0b5cad">MSP</text>
+  <text x="82" y="27"
+        font-family="Segoe UI, Helvetica Neue, Arial, sans-serif"
+        font-size="17" font-weight="600" letter-spacing="2.5"
+        fill="#16191e">SPORTS</text>
+</svg>

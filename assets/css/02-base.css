@@ -1,0 +1,110 @@
+/* ==========================================================================
+   02 · BASE
+   Bare element styling. Classes belong in 04-components.css.
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--clr-surface);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Belt and braces against a stray wide child causing horizontal scroll. */
+  overflow-x: hidden;
+}
+
+/* Scroll is locked from JS while the mobile drawer is open. */
+body[data-scroll-locked] {
+  overflow: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--clr-ink-900);
+}
+
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+h4 { font-size: var(--fs-lg); line-height: var(--lh-snug); }
+
+h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--clr-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--clr-accent-hover);
+}
+
+/* Never remove focus indication. Verified >=3:1 against every surface. */
+:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Dark surfaces need a light ring instead. */
+.u-on-dark :focus-visible,
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--clr-text-invert);
+}
+
+strong, b {
+  font-weight: var(--fw-semibold);
+}
+
+small {
+  font-size: var(--fs-sm);
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  background-color: var(--clr-line);
+  margin-block: var(--sp-8);
+}
+
+figure {
+  margin: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+::selection {
+  background-color: var(--clr-accent);
+  color: var(--clr-accent-ink);
+}
+
+/* Images carry width/height attributes for CLS, so let CSS scale them. */
+img[width][height] {
+  height: auto;
+}

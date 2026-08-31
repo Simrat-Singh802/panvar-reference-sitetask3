@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" role="img" aria-label="Panwar Knitwear">
+  <title>Panwar Knitwear</title>
+  <rect width="44" height="44" rx="3" fill="#0d0f12"/>
+  <!-- Interlocking knit loops, echoing a stitch structure. -->
+  <g fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round">
+    <path d="M11 30V18a5 5 0 0 1 10 0v12"/>
+    <path d="M23 14v12a5 5 0 0 0 10 0V14"/>
+  </g>
+</svg>

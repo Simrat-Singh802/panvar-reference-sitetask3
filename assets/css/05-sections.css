@@ -1,0 +1,331 @@
+/* ==========================================================================
+   05 · SECTIONS
+   Page-level compositions built from the primitives in 03 and 04.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  background-color: var(--clr-surface-dark);
+  color: var(--clr-text-on-dark-muted);
+  overflow: hidden;
+  padding-block: clamp(4rem, 11vw, 8.5rem);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../svg/pattern-knit.svg");
+  background-size: 180px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Soft accent wash so the hero is not a flat black slab.
+   Clipped by .hero's overflow:hidden, so the negative offsets and 60vw width
+   can never create horizontal scroll.
+   The plain rgba gradient is the fallback: browsers without color-mix()
+   support drop that whole declaration and keep this one. */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 60vw;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.16) 0%,
+    transparent 65%
+  );
+  background: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--clr-accent) 55%, transparent) 0%,
+    transparent 65%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  color: var(--clr-text-invert);
+  max-width: 18ch;
+  margin-block-end: var(--sp-5);
+}
+
+.hero__title em {
+  font-style: normal;
+  display: block;
+  color: var(--clr-ink-400);
+}
+
+.hero__lede {
+  font-size: var(--fs-md);
+  max-width: 52ch;
+  color: var(--clr-text-on-dark-muted);
+  margin-block-end: var(--sp-7);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-block-end: var(--sp-8);
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  padding-block-start: var(--sp-6);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: var(--fs-sm);
+}
+
+.hero__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.hero__meta-item svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Compact hero for interior pages. */
+.hero--page {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.hero--page .hero__title {
+  font-size: var(--fs-3xl);
+  max-width: 22ch;
+}
+
+/* Light hero variant for brand pages that want their accent to lead. */
+.hero--brand {
+  background-color: var(--clr-accent);
+}
+
+.hero--brand::after {
+  background: radial-gradient(circle at center,
+              rgba(255, 255, 255, 0.22) 0%, transparent 65%);
+}
+
+.hero--brand .hero__lede,
+.hero--brand .hero__meta {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --------------------------------------------------------------------------
+   Brand split — the two brands side by side on the homepage.
+   Each half carries its own data-brand, so tokens resolve independently.
+   -------------------------------------------------------------------------- */
+.brand-split {
+  display: grid;
+  gap: 1px;
+  background-color: var(--clr-line);
+}
+
+@media (min-width: 52rem) {
+  .brand-split {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: clamp(2.5rem, 5vw, 4.5rem) var(--gutter);
+  background-color: var(--clr-surface);
+  overflow: hidden;
+  transition: background-color var(--dur) var(--ease-out);
+}
+
+/* A tinted wash keyed to each brand's accent. */
+.brand-panel::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 4px;
+  background-color: var(--clr-accent);
+}
+
+.brand-panel__logo {
+  height: 2.5rem;
+  width: auto;
+  margin-block-end: var(--sp-2);
+}
+
+.brand-panel__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--clr-ink-900);
+}
+
+.brand-panel__text {
+  color: var(--clr-text-muted);
+  max-width: 44ch;
+}
+
+.brand-panel__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.brand-panel__list li {
+  padding: var(--sp-1) var(--sp-4);
+  border-radius: var(--radius-pill);
+  background-color: var(--clr-accent-soft);
+  color: var(--clr-accent);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.brand-panel__footer {
+  margin-block-start: auto;
+  padding-block-start: var(--sp-4);
+}
+
+/* --------------------------------------------------------------------------
+   CTA band
+   -------------------------------------------------------------------------- */
+.cta-band {
+  background-color: var(--clr-surface-dark);
+  color: var(--clr-text-on-dark-muted);
+  padding-block: var(--section-y-tight);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../svg/pattern-knit.svg");
+  background-size: 160px;
+  opacity: 0.045;
+  pointer-events: none;
+}
+
+.cta-band__inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+.cta-band__title {
+  font-size: var(--fs-xl);
+  color: var(--clr-text-invert);
+  max-width: 24ch;
+  margin-block-end: var(--sp-2);
+}
+
+.cta-band__text {
+  color: var(--clr-text-on-dark-muted);
+  max-width: 46ch;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* --------------------------------------------------------------------------
+   Media frame — images with a branded offset border
+   -------------------------------------------------------------------------- */
+.media-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--clr-surface-sunk);
+  aspect-ratio: 4 / 3;
+}
+
+.media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-frame img.is-placeholder {
+  object-fit: contain;
+  padding: var(--sp-6);
+}
+
+.media-frame--portrait { aspect-ratio: 3 / 4; }
+.media-frame--square   { aspect-ratio: 1 / 1; }
+
+/* --------------------------------------------------------------------------
+   Stat row — used only for verifiable facts.
+   -------------------------------------------------------------------------- */
+.stat {
+  padding: var(--sp-5) 0;
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--clr-accent);
+  letter-spacing: var(--tracking-tight);
+}
+
+.stat__label {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+  margin-block-start: var(--sp-2);
+}
+
+.section--dark .stat__value { color: var(--clr-text-invert); }
+.section--dark .stat__label { color: var(--clr-text-on-dark-muted); }
+
+/* --------------------------------------------------------------------------
+   Callout — TODO notices for content the client still owes.
+   -------------------------------------------------------------------------- */
+.callout {
+  padding: var(--sp-5);
+  border: 1px dashed #d9a441;
+  border-radius: var(--radius-md);
+  background-color: #fffaf0;
+  color: #6b4400;
+  font-size: var(--fs-sm);
+}
+
+.callout__title {
+  font-weight: var(--fw-semibold);
+  margin-block-end: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.callout a {
+  color: #6b4400;
+}

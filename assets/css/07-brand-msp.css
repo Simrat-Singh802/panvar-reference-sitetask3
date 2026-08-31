@@ -1,0 +1,72 @@
+/* ==========================================================================
+   07 · BRAND · MSP SPORTS  (bottomwear — track pants, lowers, shorts,
+   nikkar, capri, sportswear)
+
+   Personality: athletic, kinetic, energetic. Sport blue, generous rounding,
+   tight tracking, punchier motion and shadows. Deliberately the opposite of
+   ZONIXA on every axis so the two never blur together.
+   ========================================================================== */
+
+[data-brand="msp"] {
+  /* Sport blue. 5.9:1 on white — AA for body text. */
+  --clr-accent:       #0b5cad;
+  --clr-accent-hover: #084784;
+  --clr-accent-ink:   #ffffff;
+  --clr-accent-soft:  #e7f1fb;
+  --clr-accent-line:  #b3d2ef;
+
+  /* Rounded, athletic geometry. */
+  --radius-sm:   6px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --radius-pill: 999px;
+
+  /* Tight, punchy typography — sportswear, not fashion. */
+  --tracking-caps: 0.1em;
+  --tracking-wide: 0.02em;
+  --brand-eyebrow-tracking: 0.12em;
+
+  --shadow-md: 0 6px 16px rgba(11, 92, 173, 0.14),
+               0 2px 4px rgba(11, 92, 173, 0.08);
+  --shadow-lg: 0 20px 44px rgba(11, 92, 173, 0.2),
+               0 4px 12px rgba(11, 92, 173, 0.1);
+
+  /* Motion reads faster and more athletic. */
+  --dur:      220ms;
+  --dur-slow: 420ms;
+}
+
+/* Squarer product crop — bottomwear photographs wider than topwear. */
+[data-brand="msp"] .card__media {
+  aspect-ratio: 1 / 1;
+}
+
+/* A stronger lift: kinetic rather than editorial. */
+@media (hover: hover) {
+  [data-brand="msp"] .card:hover {
+    transform: translateY(-6px);
+  }
+}
+
+[data-brand="msp"] .card__title {
+  font-size: var(--fs-md);
+  letter-spacing: -0.01em;
+}
+
+/* Pill buttons. */
+[data-brand="msp"] .btn {
+  border-radius: var(--radius-pill);
+}
+
+/* Accent bar on feature icons for a sportier read. */
+[data-brand="msp"] .feature__icon {
+  background-color: var(--clr-accent);
+  color: var(--clr-accent-ink);
+}
+
+/* Angled highlight behind the brand eyebrow. */
+[data-brand="msp"] .eyebrow::before {
+  width: 2.25rem;
+  height: 3px;
+  border-radius: var(--radius-pill);
+}
