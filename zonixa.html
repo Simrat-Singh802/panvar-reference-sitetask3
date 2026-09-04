@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="assets/css/07-brand-msp.css">
 <link rel="stylesheet" href="assets/css/08-utilities.css">
 <link rel="stylesheet" href="assets/css/09-animations.css">
+<link rel="stylesheet" href="assets/css/10-product.css">
 
 <!-- Flip no-js -> js before first paint so reveals never trap content at opacity:0 -->
 <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
@@ -123,22 +124,9 @@
         </p>
       </div>
 
-      <!-- Filter chips -->
-      <!-- Single-select, so these are radios rather than toggle buttons:
-           aria-pressed would imply five independent on/off controls. -->
-      <div class="filter" role="radiogroup" aria-label="Filter products by category"
-           data-filter="#zonixa-products" data-filter-status="#zonixa-filter-status">
-        <button type="button" class="filter__chip" role="radio" data-filter-value="all" aria-checked="true">All</button>
-        <button type="button" class="filter__chip" role="radio" data-filter-value="hoodies" aria-checked="false">Hoodies</button>
-        <button type="button" class="filter__chip" role="radio" data-filter-value="tshirts" aria-checked="false">T-Shirts</button>
-        <button type="button" class="filter__chip" role="radio" data-filter-value="sweatshirts" aria-checked="false">Sweatshirts</button>
-        <button type="button" class="filter__chip" role="radio" data-filter-value="winter" aria-checked="false">Winter Wear</button>
-      </div>
-      <p id="zonixa-filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
-
       <div class="grid grid--3" id="zonixa-products" data-reveal-group>
 
-        <article class="card" data-category="hoodies">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-hoodie-logo.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -146,12 +134,12 @@
                  width="982" height="1147" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">Heavy 320 GSM Round Neck Hoodies With Logo</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-hoodie-logo.html">Heavy 320 GSM Round Neck Hoodies With Logo</a></h3>
             <p class="card__meta">320 GSM &middot; Round neck &middot; Logo application</p>
           </div>
         </article>
 
-        <article class="card" data-category="hoodies">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-hoodie-filice.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -159,12 +147,12 @@
                  width="982" height="1147" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">Two Thread Filice Round Neck Hoodies</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-hoodie-filice.html">Two Thread Filice Round Neck Hoodies</a></h3>
             <p class="card__meta">Two thread filice &middot; Round neck</p>
           </div>
         </article>
 
-        <article class="card" data-category="hoodies">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-hoodie-chestprint.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -172,12 +160,12 @@
                  width="982" height="1147" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">320 GSM Heavy Round Neck Hoodies with Chest Print</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-hoodie-chestprint.html">320 GSM Heavy Round Neck Hoodies with Chest Print</a></h3>
             <p class="card__meta">320 GSM &middot; Chest print</p>
           </div>
         </article>
 
-        <article class="card" data-category="tshirts">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-tshirt-dryfit.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -185,12 +173,12 @@
                  width="982" height="1147" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">Dry Fit Ben Collar Half Sleeve T Shirts</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-tshirt-dryfit.html">Dry Fit Ben Collar Half Sleeve T Shirts</a></h3>
             <p class="card__meta">Dry Fit &middot; Ben collar &middot; Half sleeve</p>
           </div>
         </article>
 
-        <article class="card" data-category="hoodies">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-hoodie-zip.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -198,12 +186,12 @@
                  width="982" height="1147" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">320 GSM Heavy Zip Hoodies</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-hoodie-zip.html">320 GSM Heavy Zip Hoodies</a></h3>
             <p class="card__meta">320 GSM &middot; Full zip</p>
           </div>
         </article>
 
-        <article class="card" data-category="sweatshirts">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-sweatshirt.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -211,12 +199,12 @@
                  width="338" height="500" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">Matty Filice Round Neck Chest Print Sweatshirts</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-sweatshirt.html">Matty Filice Round Neck Chest Print Sweatshirts</a></h3>
             <p class="card__meta">Matty filice &middot; Round neck &middot; Chest print</p>
           </div>
         </article>
 
-        <article class="card" data-category="winter">
+        <article class="card card--linked">
           <div class="card__media">
             <img src="assets/img/zonixa/zonixa-winter.jpg"
                  onerror="this.onerror=null;this.src='assets/svg/placeholder-zonixa.svg';this.classList.add('is-placeholder')"
@@ -224,7 +212,7 @@
                  width="374" height="500" loading="lazy" decoding="async">
           </div>
           <div class="card__body">
-            <h3 class="card__title">Winter Hoodies &mdash; Filice Round Neck Chest Print</h3>
+            <h3 class="card__title"><a class="card__link" href="product-zonixa-winter.html">Winter Hoodies &mdash; Filice Round Neck Chest Print</a></h3>
             <p class="card__meta">Heavy GSM &middot; Hooded &middot; Chest print</p>
           </div>
         </article>

@@ -1,0 +1,245 @@
+/* ==========================================================================
+   10 · PRODUCT DETAIL
+   Layout for the single-product pages. Built entirely from existing tokens,
+   so it inherits brand theming via [data-brand] like every other component.
+   ========================================================================== */
+
+.product {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+@media (min-width: 52rem) {
+  .product {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+}
+
+/* --- Media ---------------------------------------------------------------- */
+.product__media {
+  border: 1px solid var(--clr-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--clr-surface-sunk);
+  aspect-ratio: 1 / 1;
+}
+
+.product__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product__media img.is-placeholder {
+  object-fit: contain;
+  padding: var(--sp-6);
+}
+
+/* --- Title ---------------------------------------------------------------- */
+.product__title {
+  font-size: var(--fs-2xl);
+  margin-block-end: var(--sp-5);
+}
+
+/* --- Spec list (Availability / Article / Material) ------------------------ */
+.product__specs {
+  display: grid;
+  gap: var(--sp-3);
+  margin: 0 0 var(--sp-7);
+}
+
+.product__spec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-items: baseline;
+}
+
+.product__spec dt {
+  font-weight: var(--fw-bold);
+  color: var(--clr-ink-900);
+}
+
+.product__spec dd {
+  margin: 0;
+  color: var(--clr-text-muted);
+}
+
+.product__spec dd.is-stock {
+  color: var(--clr-success);
+  font-weight: var(--fw-medium);
+}
+
+/* --- Group heading shared by colours and sizes ---------------------------- */
+.product__group {
+  margin-block-end: var(--sp-6);
+}
+
+.product__group-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  color: var(--clr-ink-900);
+  margin-block-end: var(--sp-3);
+}
+
+/* --- Colour swatches ------------------------------------------------------
+   Presentational only: this is a manufacturer's catalogue, not a shop, so
+   swatches are not selectable controls. Each carries a visible text label
+   for accessibility — colour is never the only way to identify a variant. */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 4.5rem;
+  text-align: center;
+}
+
+.swatch__dot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-pill);
+  /* Semi-transparent ring reads correctly on both pale and dark swatches. */
+  box-shadow: inset 0 0 0 1px rgba(13, 15, 18, 0.22);
+}
+
+.swatch__name {
+  font-size: var(--fs-xs);
+  color: var(--clr-text-muted);
+  line-height: 1.3;
+}
+
+.product__note {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+  margin-block-start: var(--sp-3);
+}
+
+/* --- Sizes ---------------------------------------------------------------- */
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.size {
+  display: grid;
+  place-items: center;
+  min-width: 3.25rem;
+  min-height: 2.75rem;
+  padding-inline: var(--sp-3);
+  border: 1px solid var(--clr-line-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+  color: var(--clr-ink-900);
+  background-color: var(--clr-surface);
+}
+
+/* --- Description ---------------------------------------------------------- */
+.product__description {
+  margin-block-start: var(--sp-7);
+  padding-block-start: var(--sp-6);
+  border-block-start: 1px solid var(--clr-line);
+}
+
+.product__description p {
+  color: var(--clr-text-muted);
+  max-width: 60ch;
+}
+
+.product__description p + p {
+  margin-block-start: var(--sp-4);
+}
+
+/* --- Actions -------------------------------------------------------------- */
+.product__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-block-start: var(--sp-7);
+}
+
+/* --------------------------------------------------------------------------
+   Linked product cards (on the brand listing page)
+   .card--linked / .card__link are defined in 04-components.css; these rules
+   add the affordance that the card is now clickable.
+   -------------------------------------------------------------------------- */
+.card--linked .card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .card--linked:hover .card__title a {
+    color: var(--clr-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+}
+
+/* The whole card is one link target, so the focus ring belongs on the card,
+   not on the text alone. */
+.card--linked:focus-within {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+.card--linked .card__link:focus-visible {
+  outline: none;
+}
+
+/* --- Breadcrumb ----------------------------------------------------------- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: 0 0 var(--sp-6);
+  padding: 0;
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  color: var(--clr-ink-400);
+}
+
+.breadcrumb a {
+  color: var(--clr-text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--clr-accent);
+  text-decoration: underline;
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--clr-ink-900);
+  font-weight: var(--fw-medium);
+}

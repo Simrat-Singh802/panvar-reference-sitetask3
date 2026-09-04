@@ -73,6 +73,17 @@ reproduced at the owner's explicit request after being shown what they depict.
 
 Note the filenames no longer describe their contents — they are historical.
 
+**These same five images now also appear on the MSP product detail pages**
+(`product-msp-*.html`), because the card and its detail page must show the
+same photograph. So each MSP detail page pairs a placeholder photo with
+*accurate* article numbers, materials and descriptions for the real product.
+Every one of those pages carries a visible callout explaining the mismatch.
+
+Replacing the five card images fixes the card and its detail page together —
+the two are wired to the same file. The genuine MSP photography (real MSP
+garments, product-only, normalised to 800×800) is in `msp-backup-v2` in the
+session scratchpad.
+
 `msp-sportswear.jpg` is still on disk but **no longer referenced by any page**.
 It is the one genuine MSP product photo (grey cuffed joggers) and was kept so
 the card can be restored without re-downloading.

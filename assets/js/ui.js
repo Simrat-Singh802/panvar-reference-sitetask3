@@ -144,94 +144,6 @@
   }
 
   /* --------------------------------------------------------------------
-     Product filter — chips toggle visibility of [data-category] cards.
-     Announces the result count so screen-reader users get feedback.
-     -------------------------------------------------------------------- */
-  function initFilter() {
-    each('[data-filter]', function (group) {
-      var targetSel = group.getAttribute('data-filter');
-      var items = document.querySelectorAll(targetSel + ' [data-category]');
-      var statusSel = group.getAttribute('data-filter-status');
-      var status = statusSel ? document.querySelector(statusSel) : null;
-      if (!items.length) return;
-
-      var chips = group.querySelectorAll('[data-filter-value]');
-
-      /* Roving tabindex: only the checked chip is in the tab order. */
-      Array.prototype.forEach.call(chips, function (chip) {
-        chip.tabIndex = chip.getAttribute('aria-checked') === 'true' ? 0 : -1;
-      });
-
-      /* A radiogroup must be arrow-navigable, otherwise roving tabindex
-         would trap the group at a single unreachable chip. */
-      group.addEventListener('keydown', function (event) {
-        var keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
-        if (keys.indexOf(event.key) === -1) return;
-
-        var list = Array.prototype.slice.call(chips);
-        var current = list.indexOf(document.activeElement);
-        if (current === -1) return;
-
-        event.preventDefault();
-        var next;
-        if (event.key === 'Home') {
-          next = 0;
-        } else if (event.key === 'End') {
-          next = list.length - 1;
-        } else {
-          var step = (event.key === 'ArrowRight' || event.key === 'ArrowDown') ? 1 : -1;
-          next = (current + step + list.length) % list.length;
-        }
-
-        list[next].focus();
-        list[next].click();
-      });
-
-      Array.prototype.forEach.call(chips, function (chip) {
-        chip.addEventListener('click', function () {
-          var value = chip.getAttribute('data-filter-value');
-
-          /* Radio semantics: exactly one checked. Roving tabindex keeps the
-             group a single tab stop, as a real radio group behaves. */
-          Array.prototype.forEach.call(chips, function (other) {
-            var on = other === chip;
-            other.setAttribute('aria-checked', on ? 'true' : 'false');
-            other.tabIndex = on ? 0 : -1;
-          });
-
-          var shown = 0;
-          Array.prototype.forEach.call(items, function (item) {
-            var match = value === 'all' ||
-                        item.getAttribute('data-category') === value;
-            item.hidden = !match;
-            if (match) shown++;
-          });
-
-          /* The reveal stagger uses :nth-child, which counts DOM position and
-             so leaves gaps once cards are hidden. Filtered results should
-             appear at once anyway — mark the group done so every visible card
-             is already revealed. */
-          var group2 = document.querySelector(targetSel);
-          if (group2 && group2.hasAttribute('data-reveal-group')) {
-            group2.setAttribute('data-revealed', '');
-          }
-
-          announce(shown);
-        });
-      });
-
-      /* Announce the starting count too, so the region is not silent until
-         the first interaction. */
-      announce(items.length);
-
-      function announce(n) {
-        if (!status) return;
-        status.textContent = n + ' ' + (n === 1 ? 'product' : 'products') + ' shown';
-      }
-    });
-  }
-
-  /* --------------------------------------------------------------------
      Helpers
      -------------------------------------------------------------------- */
   function each(selector, fn) {
@@ -242,7 +154,6 @@
     stampContacts();
     stampYear();
     initAccordion();
-    initFilter();
   }
 
   window.PK.ui = { init: init };

@@ -910,42 +910,6 @@ select.field__control {
 }
 
 /* --------------------------------------------------------------------------
-   Filter chips
-   -------------------------------------------------------------------------- */
-.filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-  margin-block-end: var(--sp-7);
-}
-
-.filter__chip {
-  min-height: 2.5rem;
-  padding: var(--sp-2) var(--sp-5);
-  border: 1px solid var(--clr-line-strong);
-  border-radius: var(--radius-pill);
-  background-color: var(--clr-surface);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
-  color: var(--clr-text);
-  transition: all var(--dur-fast) var(--ease-out);
-}
-
-.filter__chip:hover {
-  border-color: var(--clr-accent);
-  color: var(--clr-accent);
-}
-
-/* Chips are role="radio" (single-select), so the state is aria-checked.
-   aria-pressed is kept as a fallback for any toggle-style use. */
-.filter__chip[aria-checked="true"],
-.filter__chip[aria-pressed="true"] {
-  background-color: var(--clr-accent);
-  border-color: var(--clr-accent);
-  color: var(--clr-accent-ink);
-}
-
-/* --------------------------------------------------------------------------
    Link list with arrow (external resources)
    -------------------------------------------------------------------------- */
 .link-row {
