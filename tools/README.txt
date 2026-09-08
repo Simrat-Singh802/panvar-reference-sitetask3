@@ -45,6 +45,21 @@ measured 1.87:1 against white and failed the 3:1 requirement for input
 borders. This script caught it; a visual review would not have.
 
 
+make-og-image.ps1
+-----------------
+Regenerates assets\img\og\og-default.jpg, the 1200x630 social sharing card
+used by the six non-product pages.
+
+    powershell -File tools\make-og-image.ps1
+
+Run it after changing the brand names, the company name, or the palette in
+01-tokens.css. The 12 product pages don't use this file — each points its
+og:image at the product photo it already displays.
+
+Nothing on the card is invented: it uses the site's own colours, the
+knit-stitch texture, and the verified company and brand names.
+
+
 WHAT THESE DO NOT COVER
 -----------------------
 Neither script renders the page, so they cannot see layout, spacing or

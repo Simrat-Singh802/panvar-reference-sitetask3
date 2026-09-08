@@ -56,11 +56,18 @@ assets/img/facility/          (landscape, 4:3 — e.g. 1200 x 900)
   bench), not the Ludhiana facility. Real facility photographs needed.
 
 assets/img/og/                (1200 x 630 — social sharing previews)
-  og-default.jpg
-  og-zonixa.jpg
-  og-msp.jpg
-  (These are referenced in the og:image meta tags once added — see
-   CONTENT-TODO.md.)
+  [PRESENT] og-default.jpg    used by home, zonixa, msp-sports, about,
+                              contact and 404
+
+  Generated, not photographed — run tools\make-og-image.ps1 to rebuild it.
+  It uses the site's own ink-900 ground, the knit-stitch texture from
+  assets/svg/pattern-knit.svg, and the company and brand names.
+
+  The 12 product pages do NOT use this file: each points its og:image at the
+  product photograph it already displays, so no extra asset is needed.
+
+  If you later want per-brand cards (og-zonixa.jpg / og-msp.jpg), copy the
+  generator and point zonixa.html / msp-sports.html at them.
 
 
 ASPECT RATIOS MATTER

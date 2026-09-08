@@ -102,6 +102,35 @@ $jsBp    = ([regex]::Match($nav,"MOBILE_MQ\s*=\s*'\(max-width:\s*([0-9.]+rem)\)'
 Check "CSS and JS breakpoints match" ($cssBp -and $jsBp -and ($cssBp -eq $jsBp)) "css=$cssBp js=$jsBp"
 
 ""
+"=== social sharing cards (og:image) ==="
+# Every page declares twitter:card=summary_large_image, which asks for a large
+# image preview. Without og:image the card silently degrades to a bare text
+# link on WhatsApp / LinkedIn / X. This ran unchecked across all 18 pages
+# until it was found by hand, so it is asserted here.
+# NOTE: og:image must be an ABSOLUTE url - crawlers ignore relative paths.
+$ogMissing = @(); $ogRelative = @(); $ogBrokenPath = @(); $ogNoAlt = @()
+foreach ($page in (Get-ChildItem "$d\*.html")) {
+  $html = Get-Content $page.FullName -Raw
+  if ($html -notmatch 'name="twitter:card"') { continue }
+
+  $og = [regex]::Match($html, '<meta property="og:image" content="([^"]+)">')
+  if (-not $og.Success) { $ogMissing += $page.Name; continue }
+
+  $url = $og.Groups[1].Value
+  if ($url -notmatch '^https?://') { $ogRelative += "$($page.Name) -> $url"; continue }
+
+  # Strip the scheme+host and confirm the file is actually in the repo.
+  $rel = ($url -replace '^https?://[^/]+/', '') -replace '/', '\'
+  if (-not (Test-Path (Join-Path $d $rel))) { $ogBrokenPath += "$($page.Name) -> $url" }
+
+  if ($html -notmatch '<meta property="og:image:alt"') { $ogNoAlt += $page.Name }
+}
+Check "every page with twitter:card has og:image" ($ogMissing.Count -eq 0)   ($ogMissing -join ', ')
+Check "every og:image is an absolute url"         ($ogRelative.Count -eq 0)  ($ogRelative -join ', ')
+Check "every og:image resolves on disk"           ($ogBrokenPath.Count -eq 0) ($ogBrokenPath -join ', ')
+Check "every og:image has og:image:alt"           ($ogNoAlt.Count -eq 0)     ($ogNoAlt -join ', ')
+
+""
 "=== file:// safety ==="
 Check "no external <use> refs"       (-not ((Get-Content "$d\*.html" -Raw) -match '<use href="[^#]'))
 Check "no script type=module"        (-not ((Get-Content "$d\assets\js\*.js" -Raw) -match '^\s*import\s'))
