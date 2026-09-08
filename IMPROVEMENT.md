@@ -158,15 +158,39 @@ assumed correct after the file was written.
 
 ---
 
-## Known limitation
+## Follow-up: the domain had to be corrected
 
-The `og:image` URLs use `https://panwarknitwear.com/`, matching the existing
-`og:url` and `canonical` tags in the Homework 2 baseline.
+The first version of this change used `https://panwarknitwear.com/`, inherited
+from the Homework 2 baseline's `og:url` and `canonical` tags. Testing the live
+deployment showed that was wrong — this site is served from Vercel, not from
+`panwarknitwear.com`:
 
-**If the site is shared from a different domain** (for example a
-`*.vercel.app` address), those three tags must be updated together or the
-preview image will not load. This is a one-line-per-page change and is
-deliberately left as-is so all URL tags stay internally consistent.
+```
+panwarknitwear.com/assets/img/zonixa/zonixa-hoodie-logo.jpg              -> 404
+panvar-reference-sitetask3.vercel.app/assets/img/zonixa/...-logo.jpg     -> 200, 254 KB
+```
+
+WhatsApp was fetching a URL that did not exist, so the preview still showed
+title and description with no photograph — the original symptom, from a second
+cause.
+
+Fixed in commit `5f4c53d`: `og:image`, `og:url` and `canonical` all now point
+at the deployed domain, across 18 pages, plus `sitemap.xml` (17 URLs) and
+`robots.txt`.
+
+**All three tags must move together.** A `canonical` or `og:url` pointing at a
+domain that 404s is worse than omitting it, and if `og:url` disagrees with the
+page's real address some platforms discard the preview entirely.
+
+**To move domains again:** replace the base URL across `*.html`,
+`sitemap.xml` and `robots.txt`. Prose references to `panwarknitwear.com` in
+the owner-facing notes on `zonixa.html` and `msp-sports.html` are deliberately
+left alone — those describe the reference site the content came from, not a
+live URL.
+
+The lesson worth recording: the tags were internally consistent and every
+local check passed, but the feature was still broken in production. Only
+fetching the real URL over the network revealed it.
 
 ---
 
